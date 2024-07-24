@@ -1,49 +1,47 @@
-#include<math.h>
-#include<stdio.h>
-#include<stdlib.h>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-void game(char a, char b){
-    if(a==b){
+int game(char a, char b) {
+    if (a == b) {
         return -1;
     }
-    if(a == 's' && b == 'p'){
+    if ((a == 's' && b == 'p') || (a == 'p' && b == 'z') || (a == 'z' && b == 's')) {
         return 0;
     }
-    
-    else if(a=='p' && b == 's'){
+    else if ((a == 'p' && b == 's') || (a == 'z' && b == 'p') || (a == 's' && b == 'z')) {
         return 1;
     }
-    if(a=='s' && b == 'z'){
-        return 1;
-    }
-    else if(a=='z' && b == 's'){
-        return 0;
-    }
-    if(a=='p' && b == 'z'){
-        return 0;
-    }
-    else if(a=='z' && b =='p'){
-        return 1;
-    }
+    return -1;
+
+
 }
-int main(){
-    char b;
-    char a;
-    printf('Enter s for stone\n');
-    printf("\nEnter p for paper");
-    printf("\nEnter s for sessior");
-    scanf("%c",&a);
-    char result = game(a,b);
+
+int main() {
+    char a, b;
+    char options[] = {'s', 'p', 'z'};
     
-    if(result == -1){
-        printf("Game Draw");
+    printf("Enter 's' for stone\n");
+    printf("Enter 'p' for paper\n");
+    printf("Enter 'z' for scissor\n");
+    scanf(" %c", &a);
+
+    srand(time(NULL));
+    b = options[rand() % 3]; 
+    int result = game(a, b);
+
+    if (result == -1) {
+        printf("Game Draw\n");
     }
-    else if(result == 1){
-        printf("Game Won!");
+    else if (result == 1) {
+        printf("Game Won!\n");
     }
-    else(result == 0){
-        printf("You Lost!");
+    else if (result == 0) {
+        printf("You Lost!\n");
     }
-    printf("\n You Choose : %c and Computer Choose : %c",a,b);
+    
+    printf("You Choose: %c and Computer Choose: %c\n", a, b);
     return 0;
 }
+
